@@ -1,5 +1,7 @@
 // Todo module
 
+import Projects from "./projects.js"
+
 class Todo {
   constructor (title, description, dueDate, prio, notes, checklist) {
     this.title = title;
@@ -9,6 +11,7 @@ class Todo {
     this.notes = notes;
     this.checklist = checklist;
     this.done = false;
+    this.projects = new Set();
   }
   
   set title (newTitle) {
@@ -33,6 +36,14 @@ class Todo {
 
   set checklist (newChecklist) {
     this.checklist = newChecklist;
+  }
+
+  addToProject (project) {
+    // WIP
+  }
+
+  deleteFromProject () {
+    // WIP
   }
 
   checkAsDone () {
