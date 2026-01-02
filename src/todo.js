@@ -8,6 +8,7 @@ class Todo {
     this.priority = prio;
     this.notes = notes;
     this.checklist = checklist;
+    this.done = false;
   }
   
   set title (newTitle) {
@@ -33,4 +34,10 @@ class Todo {
   set checklist (newChecklist) {
     this.checklist = newChecklist;
   }
+
+  checkAsDone () {
+    this.done = true;
+  }
 }
+
+export default Todo;
