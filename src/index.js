@@ -1,6 +1,6 @@
 import diceImage from "./dice1.jpg";
 import "./style.css";
-import { greeting } from "./greeting.js";
+import Todo from "./todo.js";
 
 const image = document.createElement("img");
 image.src = diceImage;
