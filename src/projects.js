@@ -6,11 +6,11 @@ class Projects {
   }
 
   addProject (item) {
-    this.project.add(item);
+    this.projects.add(item);
   }
 
   deleteProject (item) {
-    this.project.delete(item);
+    this.projects.delete(item);
   }
 }
 
