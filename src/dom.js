@@ -1,7 +1,7 @@
 import Todo from "./todo.js";
 import Projects from "./projects.js";
 
-class DomManipulator {
+class dom {
 
   content;
 
@@ -24,4 +24,4 @@ class DomManipulator {
   }
 }
 
-export default DomManipulator;
+export default dom;
