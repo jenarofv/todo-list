@@ -1,3 +1,46 @@
+* {
+  --bg-color: whitesmoke;
+  --font-color: black;
+  --input-color: white;
+  --big-border-radius: 10px;
+  --small-border-radius: 5px;
+  --small-padding: 10px;
+  box-sizing: content-box;
+  font-family: Arial, Ubuntu, sans-serif;
+  color: var(--font-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  * {
+    --bg-color: #3f4f4f;
+    --font-color: whitesmoke;
+    --input-color: dimgray;
+  }
+}
+
 body {
-  background-color: rebeccapurple;
+  background-color: var(--bg-color);
+}
+
+.todo {
+  border: 1px solid var(--font-color);
+  border-radius: var(--big-border-radius);
+}
+
+textarea {
+  background-color: var(--input-color);
+  border-radius: var(--small-border-radius);
+  padding: var(--small-border-radius);
+}
+
+input {
+  background-color: var(--input-color);
+  border-radius: var(--small-border-radius);
+  padding: var(--small-border-radius);
+}
+
+button {
+  background-color: var(--input-color);
+  border-radius: var(--small-border-radius);
+  padding: var(--small-border-radius);
 }
