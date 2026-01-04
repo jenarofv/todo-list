@@ -1,6 +1,12 @@
 import "./style.css";
-import Todo from "./todo.js";
-import Projects from "./projects.js";
+import DomManipulator from "./todo-dom.js";
 import homepage from "./homepage.js";
 
 homepage();
+
+window.domManipulator = new DomManipulator(".container");
+window.domManipulator.createTodo();
+
+const addBtn = document.querySelector("#add-todo");
+
+addBtn.addEventListener("click", () => {window.domManipulator.createTodo()});
