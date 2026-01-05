@@ -9,4 +9,4 @@ window.dom.createTodo();
 
 const addBtn = document.querySelector("#add-todo");
 
-addBtn.addEventListener("click", () => {window.dom.createTodo()});
+// addBtn.addEventListener("click", () => {window.dom.createTodo()});
