@@ -5,6 +5,8 @@
   --big-border-radius: 10px;
   --small-border-radius: 5px;
   --small-padding: 10px;
+  --todo-card-bg: white;
+  --shadow: hsl(0deg 0 50%);
   box-sizing: content-box;
   font-family: Arial, Ubuntu, sans-serif;
   color: var(--font-color);
@@ -15,6 +17,7 @@
     --bg-color: #3f4f4f;
     --font-color: whitesmoke;
     --input-color: dimgray;
+    --todo-card-bg: black;
   }
 }
 
@@ -25,6 +28,12 @@ body {
 .todo {
   border: 1px solid var(--font-color);
   border-radius: var(--big-border-radius);
+  padding: var(--small-padding);
+  background-color: var(--todo-card-bg);
+}
+
+.todo:focus-within, .todo:hover {
+  box-shadow: 0 0 5px 5px var(--shadow);
 }
 
 textarea {
@@ -43,4 +52,11 @@ button {
   background-color: var(--input-color);
   border-radius: var(--small-border-radius);
   padding: var(--small-border-radius);
+}
+
+select {
+  font-size: 1.0em;
+  background-color: transparent;
+  border-radius: var(--small-border-radius);
+  border: none;
 }
