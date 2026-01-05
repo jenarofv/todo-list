@@ -9,34 +9,93 @@ class dom {
     this.content = document.querySelector(content);
   }
 
+  #addTitle (parent) {
+    const div = document.createElement("div");
+    const title = document.createElement("input");
+    const titleLabel = document.createElement("label");
+    titleLabel.htmlFor = "title";
+    titleLabel.textContent = "Title";
+    title.id = "title";
+    parent.appendChild(div);
+    div.appendChild(titleLabel);
+    div.appendChild(title);
+  }
+
+  #addDescription (parent) {
+    const div = document.createElement("div");
+    const description = document.createElement("textarea");
+    const descriptionLabel = document.createElement("label");
+    descriptionLabel.htmlFor = "description";
+    descriptionLabel.textContent = "description";
+    description.id = "description";
+    parent.appendChild(div);
+    div.appendChild(descriptionLabel);
+    div.appendChild(description);
+
+  }
+
+  #addDueDate (parent) {
+    const div = document.createElement("div");
+    const label = document.createElement("label");
+    label.htmlFor = "due-date";
+    label.textContent = "due date";
+    const duedate = document.createElement("input");
+    duedate.type = "date";
+    duedate.id = "due-date;"
+    parent.appendChild(div);
+    div.appendChild(label);
+    div.appendChild(duedate);
+  }
+
+  #addPriority (parent) {
+    const div = document.createElement("div");
+    const label = document.createElement("label");
+    const prio0 = document.createElement("option");
+    const prio1 = document.createElement("option");
+    const prio2 = document.createElement("option");
+    const prio3 = document.createElement("option");
+    prio0.textContent = "please select a priority";
+    prio1.textContent = "Low";
+    prio2.textContent = "Medium";
+    prio3.textContent = "High";
+    label.htmlFor = "priority";
+    label.textContent = "priority";
+    const priority = document.createElement("select");
+    priority.id = "priority";
+    parent.appendChild(div);
+    div.appendChild(label);
+    div.appendChild(priority);
+    priority.appendChild(prio1);
+    priority.appendChild(prio2);
+    priority.appendChild(prio3);
+  }
+
   createTodo () {
     const todo = document.createElement("div");
-    const title = document.createElement("input");
-    const description = document.createElement("textarea");
-    const duedate = document.createElement("input");
-    const priority = document.createElement("input");
+    const todoForm = document.createElement("form");
     const notes = document.createElement("input");
     const checklist = document.createElement("input");
     const done = document.createElement("input");
     const projects = document.createElement("input");
     todo.classList.add("todo");
     // add placeholders
-    title.placeholder = "title";
-    description.placeholder = "description";
-    priority.placeholder = "priority";
     notes.placeholder = "notes";
     // modify types
-    duedate.type = "date";
     done.type = "checkbox";
 
 
     const todoProperties = [
-      title, description, duedate, priority, notes, checklist, projects, done
+      notes, checklist, projects, done
     ]
 
+    this.#addTitle(todoForm);
+    this.#addDescription(todoForm);
+    this.#addDueDate(todoForm);
+    this.#addPriority(todoForm);
+    todo.appendChild(todoForm);
     this.content.appendChild(todo);
     for (const item of todoProperties) {
-      todo.appendChild(item);
+      todoForm.appendChild(item);
     }
   }
 }
