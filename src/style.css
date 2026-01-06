@@ -37,13 +37,15 @@ body {
 }
 
 textarea {
-  background-color: var(--input-color);
+  background-color: transparent;
   border-radius: var(--small-border-radius);
   padding: var(--small-border-radius);
+  font-size: 1em;
+  width: 80%;
 }
 
 input {
-  background-color: var(--input-color);
+  background-color: transparent;
   border-radius: var(--small-border-radius);
   padding: var(--small-border-radius);
 }
