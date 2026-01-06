@@ -127,6 +127,7 @@ class Dom {
     const checklist = document.createElement("ul");
     const done = document.createElement("input");
     const projects  = document.createElement("p");
+    const deleteButton = document.createElement("button");
     title.textContent = todo.title;
     description.textContent = todo.description;
     dueDate.textContent = todo.dueDate;
@@ -135,9 +136,12 @@ class Dom {
     notes.textContent = todo.notes;
     checklist.innerHTML = "<li>checklist not implemented yet</li>";
     done.type = "checkbox";
+    deleteButton.textContent = "🗑";
+    deleteButton.addEventListener("click",  () => {todoContainer.remove()});
     done.addEventListener("input", Dom.markAsDone);
     projects.textContent = "projects not implemented";
-    for (const item of [title, description, dueDate, priority, notes, checklist, done]) {
+    const items = [title, description, dueDate, priority, notes, checklist, done, deleteButton]
+    for (const item of items) {
       todoContainer.appendChild(item);
     }
     return todoContainer;
