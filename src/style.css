@@ -36,6 +36,10 @@ body {
   box-shadow: 0 0 5px 5px var(--shadow);
 }
 
+.checked {
+  text-decoration: line-through;
+}
+
 textarea {
   background-color: transparent;
   border-radius: var(--small-border-radius);

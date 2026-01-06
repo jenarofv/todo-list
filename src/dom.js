@@ -106,6 +106,11 @@ class Dom {
     }
   }
 
+  static markAsDone (event) {
+    const parent = event.target.parentElement;
+    parent.classList.toggle("checked");
+  }
+
   static renderTodo (todo) {
     const todoContainer = document.createElement("div");
     todoContainer.classList.add("todo");
@@ -125,6 +130,7 @@ class Dom {
     notes.textContent = todo.notes;
     checklist.innerHTML = "<li>checklist not implemented yet</li>";
     done.type = "checkbox";
+    done.addEventListener("input", Dom.markAsDone);
     projects.textContent = "projects not implemented";
     for (const item of [title, description, dueDate, priority, notes, checklist, done]) {
       todoContainer.appendChild(item);
