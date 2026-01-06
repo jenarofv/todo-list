@@ -31,7 +31,6 @@ class dom {
     parent.appendChild(div);
     div.appendChild(descriptionLabel);
     div.appendChild(description);
-
   }
 
   #addDueDate (parent) {
@@ -41,7 +40,7 @@ class dom {
     label.textContent = "due date";
     const duedate = document.createElement("input");
     duedate.type = "date";
-    duedate.id = "due-date;"
+    duedate.id = "due-date";
     parent.appendChild(div);
     div.appendChild(label);
     div.appendChild(duedate);
@@ -54,7 +53,7 @@ class dom {
     const prio1 = document.createElement("option");
     const prio2 = document.createElement("option");
     const prio3 = document.createElement("option");
-    prio0.textContent = "please select a priority";
+    prio0.textContent = "(select a priority)";
     prio1.textContent = "Low";
     prio2.textContent = "Medium";
     prio3.textContent = "High";
@@ -65,34 +64,41 @@ class dom {
     parent.appendChild(div);
     div.appendChild(label);
     div.appendChild(priority);
+    priority.appendChild(prio0);
     priority.appendChild(prio1);
     priority.appendChild(prio2);
     priority.appendChild(prio3);
   }
 
+  #addNotes (parent) {
+    const div = document.createElement("div");
+    const field = document.createElement("textarea");
+    field.id = "notes";
+    field.placeholder = "Notes...";
+    parent.appendChild(div);
+    div.appendChild(field);
+  }
+
   createTodo () {
     const todo = document.createElement("div");
     const todoForm = document.createElement("form");
-    const notes = document.createElement("input");
     const checklist = document.createElement("input");
-    const done = document.createElement("input");
     const projects = document.createElement("input");
     todo.classList.add("todo");
     // add placeholders
-    notes.placeholder = "notes";
     // modify types
-    done.type = "checkbox";
 
 
     const todoProperties = [
-      notes, checklist, projects, done
+      checklist, projects
     ]
 
+    todo.appendChild(todoForm);
     this.#addTitle(todoForm);
     this.#addDescription(todoForm);
     this.#addDueDate(todoForm);
     this.#addPriority(todoForm);
-    todo.appendChild(todoForm);
+    this.#addNotes(todoForm);
     this.content.appendChild(todo);
     for (const item of todoProperties) {
       todoForm.appendChild(item);
