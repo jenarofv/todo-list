@@ -1,5 +1,5 @@
 import Todo from "./todo.js";
-import dom from "./dom.js";
+import Dom from "./dom.js";
 
 const todoList = [];
 

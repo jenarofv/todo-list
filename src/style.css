@@ -48,6 +48,7 @@ input {
   background-color: transparent;
   border-radius: var(--small-border-radius);
   padding: var(--small-border-radius);
+  font-size: 1em;
 }
 
 button {
