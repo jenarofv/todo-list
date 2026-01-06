@@ -60,3 +60,7 @@ select {
   border-radius: var(--small-border-radius);
   border: none;
 }
+
+option {
+  background-color: var(--bg-color);
+}
