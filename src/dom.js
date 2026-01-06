@@ -1,6 +1,6 @@
 import Projects from "./projects.js";
 
-class dom {
+class Dom {
 
   content;
 
@@ -133,4 +133,4 @@ class dom {
   }
 }
 
-export default dom;
+export default Dom;
