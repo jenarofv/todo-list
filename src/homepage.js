@@ -15,9 +15,8 @@ function addToTodos (event) {
 
   const todo = new Todo(title, description, dueDate, prio, notes, checklist);
   todoList.push(todo);
-  const foo = dom.renderList(todoList);
-  console.log(foo);
-  main.appendChild(foo);
+  const todoElement = Dom.renderTodo(todo);
+  main.appendChild(todoElement);
 }
 
 export default function () {

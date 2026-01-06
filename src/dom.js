@@ -107,17 +107,30 @@ class dom {
     }
   }
 
-  static renderList (list) {
-    for (const todo in list) {
-      // do something and render todo in website.
-      const todoContainer = document.createElement("div");
-      todoContainer.classList.add("todo");
-      const title = document.createElement("h2");
-      console.log(todo.title);
-      title.textContent = todo.title;
-      todoContainer.appendChild(title);
-      return todoContainer;
+  static renderTodo (todo) {
+    const todoContainer = document.createElement("div");
+    todoContainer.classList.add("todo");
+    const title = document.createElement("h2");
+    const description = document.createElement("p");
+    const dueDate = document.createElement("p");
+    const priority = document.createElement("p");
+    const notes = document.createElement("p");
+    const checklist = document.createElement("ul");
+    const done = document.createElement("input");
+    const projects  = document.createElement("p");
+    title.textContent = todo.title;
+    description.textContent = todo.description;
+    dueDate.textContent = todo.dueDate;
+    priority.textContent = todo.priority;
+    priority.classList.add(todo.priority);
+    notes.textContent = todo.notes;
+    checklist.innerHTML = "<li>checklist not implemented yet</li>";
+    done.type = "checkbox";
+    projects.textContent = "projects not implemented";
+    for (const item of [title, description, dueDate, priority, notes, checklist, done]) {
+      todoContainer.appendChild(item);
     }
+    return todoContainer;
   }
 }
 
