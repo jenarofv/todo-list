@@ -56,6 +56,10 @@ class Dom {
     prio1.textContent = "Low";
     prio2.textContent = "Medium";
     prio3.textContent = "High";
+    prio0.value = "no-priority";
+    prio1.value = "low";
+    prio2.value = "medium";
+    prio3.value = "high";
     label.htmlFor = "priority";
     label.textContent = "priority";
     const priority = document.createElement("select");
@@ -114,6 +118,7 @@ class Dom {
   static renderTodo (todo) {
     const todoContainer = document.createElement("div");
     todoContainer.classList.add("todo");
+    todoContainer.classList.add(todo.priority);
     const title = document.createElement("h2");
     const description = document.createElement("p");
     const dueDate = document.createElement("p");
