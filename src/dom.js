@@ -79,11 +79,13 @@ class dom {
     div.appendChild(field);
   }
 
-  createTodo () {
+  addBlankTodo () {
     const todo = document.createElement("div");
     const todoForm = document.createElement("form");
     const checklist = document.createElement("input");
+    checklist.id = "checklist";
     const projects = document.createElement("input");
+    projects.id = "projects";
     todo.classList.add("todo");
     // add placeholders
     // modify types
@@ -102,6 +104,19 @@ class dom {
     this.content.appendChild(todo);
     for (const item of todoProperties) {
       todoForm.appendChild(item);
+    }
+  }
+
+  static renderList (list) {
+    for (const todo in list) {
+      // do something and render todo in website.
+      const todoContainer = document.createElement("div");
+      todoContainer.classList.add("todo");
+      const title = document.createElement("h2");
+      console.log(todo.title);
+      title.textContent = todo.title;
+      todoContainer.appendChild(title);
+      return todoContainer;
     }
   }
 }
