@@ -8,6 +8,13 @@ class Dom {
     this.content = document.querySelector(content);
   }
 
+  static removeTodo (parent) {
+    const confirmation = window.confirm("Do you really want to delete this item?");
+    if (confirmation) {
+      parent.remove();
+    }
+  }
+
   #addTitle (parent) {
     const div = document.createElement("div");
     const title = document.createElement("input");
@@ -126,6 +133,7 @@ class Dom {
     const notes = document.createElement("p");
     const checklist = document.createElement("ul");
     const done = document.createElement("input");
+    const doneLabel = document.createElement("label");
     const projects  = document.createElement("p");
     const deleteButton = document.createElement("button");
     title.textContent = todo.title;
@@ -136,11 +144,17 @@ class Dom {
     notes.textContent = todo.notes;
     checklist.innerHTML = "<li>checklist not implemented yet</li>";
     done.type = "checkbox";
-    deleteButton.textContent = "🗑";
-    deleteButton.addEventListener("click",  () => {todoContainer.remove()});
+    done.id = crypto.randomUUID();
+    doneLabel.htmlFor = done.id;
+    doneLabel.textContent = "Mark as done";
+    deleteButton.textContent = "delete";
+    deleteButton.addEventListener("click",  () => {Dom.removeTodo(todoContainer)});
     done.addEventListener("input", Dom.markAsDone);
     projects.textContent = "projects not implemented";
-    const items = [title, description, dueDate, priority, notes, checklist, done, deleteButton]
+    const items = [
+      title, description, dueDate, priority, notes, checklist, doneLabel, done,
+      deleteButton
+    ]
     for (const item of items) {
       todoContainer.appendChild(item);
     }
