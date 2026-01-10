@@ -12,11 +12,12 @@ function addToTodos (event) {
   const prio = document.querySelector("#priority").value;
   const checklist = document.querySelector("#checklist").value;
   const projects = document.querySelector("#projects").value;
+  const createdTodos = document.querySelector("#created-todos");
 
   const todo = new Todo(title, description, dueDate, prio, notes, checklist);
   todoList.push(todo);
   const todoElement = Dom.renderTodo(todo);
-  main.appendChild(todoElement);
+  createdTodos.appendChild(todoElement);
 }
 
 export default function () {
@@ -24,6 +25,8 @@ export default function () {
   const title = document.createElement("h1");
   const main = document.createElement("main");
   const addBtn = document.createElement("button");
+  const createdTodos = document.createElement("div");
+  createdTodos.id = "created-todos";
   addBtn.id = "add-todo";
   addBtn.textContent = "Create Todo";
   addBtn.addEventListener("click", addToTodos);
@@ -32,4 +35,5 @@ export default function () {
   body.appendChild(title);
   body.appendChild(main);
   body.appendChild(addBtn);
+  body.appendChild(createdTodos);
 }
