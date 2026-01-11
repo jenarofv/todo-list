@@ -97,6 +97,7 @@ class Dom {
     const projects = document.createElement("input");
     projects.id = "projects";
     todo.classList.add("todo");
+    todo.classList.add("blank-todo");
     // add placeholders
     // modify types
 

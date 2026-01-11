@@ -20,12 +20,30 @@ function addToTodos (event) {
   createdTodos.appendChild(todoElement);
 }
 
-export default function (divClass) {
+function layout () {
+  const main = document.createElement("main");
+  const header = document.createElement("div");
+  header.id = "header";
+  header.style.position = "fixed";
+  header.style.width = "100%";
+  header.style.top = "0";
+  const sidePanel = document.createElement("div");
+  sidePanel.id = "panel";
   const body = document.querySelector("body");
   const title = document.createElement("h1");
-  const main = document.createElement("main");
+  title.innerText = "Todo List";
+  header.appendChild(title);
+  body.appendChild(header);
+  body.appendChild(sidePanel);
+  body.appendChild(main);
+  main.style.marginTop = `${header.offsetHeight + 10}px`;
+}
+
+export default function (divClass) {
+  layout();
+  const body = document.querySelector("body");
+  const main = document.querySelector("main");
   const addBtn = document.createElement("button");
-  const newTodoContainer = document.createElement("div");
   const createdTodos = document.createElement("div");
   createdTodos.id = "created-todos";
   addBtn.id = "add-todo";
@@ -33,9 +51,7 @@ export default function (divClass) {
   addBtn.textContent = "Create Todo";
   addBtn.addEventListener("click", addToTodos);
   main.classList.add(divClass);
-  title.innerText = "Todo List";
-  body.appendChild(title);
-  body.appendChild(main);
+  main.classList.add("with-margins");
   const todoDom = new Dom(`.${divClass}`);
   todoDom.addBlankTodo();
   main.appendChild(addBtn);
