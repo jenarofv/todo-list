@@ -144,7 +144,8 @@ class Dom {
     notes.textContent = todo.notes;
     checklist.innerHTML = "<li>checklist not implemented yet</li>";
     done.type = "checkbox";
-    done.id = crypto.randomUUID();
+    // crypto.createUUID does not work without HTTPS
+    done.id = `${Math.random()}`;
     doneLabel.htmlFor = done.id;
     doneLabel.textContent = "Mark as done";
     deleteButton.textContent = "delete";
