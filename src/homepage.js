@@ -20,20 +20,23 @@ function addToTodos (event) {
   createdTodos.appendChild(todoElement);
 }
 
-export default function () {
+export default function (divClass) {
   const body = document.querySelector("body");
   const title = document.createElement("h1");
   const main = document.createElement("main");
   const addBtn = document.createElement("button");
+  const newTodoContainer = document.createElement("div");
   const createdTodos = document.createElement("div");
   createdTodos.id = "created-todos";
   addBtn.id = "add-todo";
   addBtn.textContent = "Create Todo";
   addBtn.addEventListener("click", addToTodos);
-  main.classList.add("container");
+  main.classList.add(divClass);
   title.innerText = "Todo List";
   body.appendChild(title);
   body.appendChild(main);
-  body.appendChild(addBtn);
+  const todoDom = new Dom(`.${divClass}`);
+  todoDom.addBlankTodo();
+  main.appendChild(addBtn);
   body.appendChild(createdTodos);
 }
