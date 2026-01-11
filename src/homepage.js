@@ -29,6 +29,7 @@ export default function (divClass) {
   const createdTodos = document.createElement("div");
   createdTodos.id = "created-todos";
   addBtn.id = "add-todo";
+  addBtn.classList.add("with-margins");
   addBtn.textContent = "Create Todo";
   addBtn.addEventListener("click", addToTodos);
   main.classList.add(divClass);

@@ -89,3 +89,14 @@ select {
 option {
   background-color: var(--bg-color);
 }
+
+.with-margins {
+  margin: 20px;
+}
+
+#created-todos {
+  display: flex;
+  flex-flow: row-reverse wrap-reverse;
+  gap: 12px;
+  justify-content: space-evenly;
+}
