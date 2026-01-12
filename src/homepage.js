@@ -4,7 +4,6 @@ import Dom from "./dom.js";
 const todoList = [];
 
 function addToTodos (event) {
-  const main = document.querySelector("main");
   const title = document.querySelector("#title").value;
   const dueDate = document.querySelector("#due-date").value;
   const description = document.querySelector("#description").value;
@@ -18,6 +17,7 @@ function addToTodos (event) {
   todoList.push(todo);
   const todoElement = Dom.renderTodo(todo);
   createdTodos.appendChild(todoElement);
+  Dom.ClearBlankTodo();
 }
 
 function layout () {

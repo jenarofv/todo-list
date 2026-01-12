@@ -15,6 +15,16 @@ class Dom {
     }
   }
 
+  static ClearBlankTodo () {
+     document.querySelector("#title").value = "";
+     document.querySelector("#due-date").value = "";
+     document.querySelector("#description").value = "";
+     document.querySelector("#notes").value = "";
+     document.querySelector("#priority").value = "no-priority";
+     document.querySelector("#checklist").value = "";
+     document.querySelector("#projects").value = "";
+  }
+
   #addTitle (parent) {
     const div = document.createElement("div");
     const title = document.createElement("input");
