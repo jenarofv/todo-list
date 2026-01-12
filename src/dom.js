@@ -102,8 +102,9 @@ class Dom {
   addBlankTodo () {
     const todo = document.createElement("div");
     const todoForm = document.createElement("form");
-    const checklist = document.createElement("input");
+    const checklist = document.createElement("textarea");
     checklist.id = "checklist";
+    checklist.placeholder = "checklist, separated by newline"
     const projects = document.createElement("input");
     projects.id = "projects";
     todo.classList.add("todo");
@@ -133,6 +134,25 @@ class Dom {
     parent.classList.toggle("checked");
   }
 
+  static generateChecklist (checklist) {
+    const ul = document.createElement("ul");
+    ul.style.listStyleType = "none";
+    for (const item in checklist) {
+      const li = document.createElement("li");
+      const checkbox = document.createElement("input");
+      const description = document.createElement("label");
+      description.textContent = item;
+      checkbox.type = "checkbox";
+      description.addEventListener("click", (event) => {
+        checkbox.checked = !checkbox.checked;
+      });
+      li.appendChild(checkbox);
+      li.appendChild(description);
+      ul.appendChild(li);
+    }
+    return ul;
+  }
+
   static renderTodo (todo) {
     const todoContainer = document.createElement("div");
     todoContainer.classList.add("todo");
@@ -142,7 +162,7 @@ class Dom {
     const dueDate = document.createElement("p");
     const priority = document.createElement("p");
     const notes = document.createElement("p");
-    const checklist = document.createElement("ul");
+    const checklist = Dom.generateChecklist(todo.checklist);
     const done = document.createElement("input");
     const doneLabel = document.createElement("label");
     const projects  = document.createElement("p");
@@ -153,7 +173,6 @@ class Dom {
     priority.textContent = todo.priority;
     priority.classList.add(todo.priority);
     notes.textContent = todo.notes;
-    checklist.innerHTML = "<li>checklist not implemented yet</li>";
     done.type = "checkbox";
     // crypto.createUUID does not work without HTTPS
     done.id = `${Math.random()}`;

@@ -9,11 +9,21 @@ function addToTodos (event) {
   const description = document.querySelector("#description").value;
   const notes = document.querySelector("#notes").value;
   const prio = document.querySelector("#priority").value;
-  const checklist = document.querySelector("#checklist").value;
+  const checklistString = document.querySelector("#checklist").value;
   const projects = document.querySelector("#projects").value;
   const createdTodos = document.querySelector("#created-todos");
 
-  const todo = new Todo(title, description, dueDate, prio, notes, checklist);
+  let checklistObj = {};
+  if (checklistString !== "") {
+    checklistObj = checklistString
+                          .split("\n")
+                          .reduce((acc, cur) => {
+                            acc[cur] = false;
+                            return acc;
+                          }, {});
+  }
+
+  const todo = new Todo(title, description, dueDate, prio, notes, checklistObj);
   todoList.push(todo);
   const todoElement = Dom.renderTodo(todo);
   createdTodos.appendChild(todoElement);
