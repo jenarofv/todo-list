@@ -175,16 +175,18 @@ class Dom {
     notes.textContent = todo.notes;
     done.type = "checkbox";
     // crypto.createUUID does not work without HTTPS
-    done.id = `${Math.random()}`;
-    doneLabel.htmlFor = done.id;
     doneLabel.textContent = "Mark as done";
+    doneLabel.addEventListener("click", (event) => {
+      done.checked = !done.checked;
+      Dom.markAsDone(event);
+    })
     deleteButton.textContent = "delete";
     deleteButton.addEventListener("click",  () => {Dom.removeTodo(todoContainer)});
     deleteButton.classList.add("red-bg");
     done.addEventListener("input", Dom.markAsDone);
     projects.textContent = "projects not implemented";
     const items = [
-      title, description, dueDate, priority, notes, checklist, doneLabel, done,
+      title, description, dueDate, priority, notes, checklist, done, doneLabel,
       deleteButton
     ]
     for (const item of items) {
