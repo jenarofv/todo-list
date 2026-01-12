@@ -161,6 +161,7 @@ class Dom {
     doneLabel.textContent = "Mark as done";
     deleteButton.textContent = "delete";
     deleteButton.addEventListener("click",  () => {Dom.removeTodo(todoContainer)});
+    deleteButton.classList.add("red-bg");
     done.addEventListener("input", Dom.markAsDone);
     projects.textContent = "projects not implemented";
     const items = [

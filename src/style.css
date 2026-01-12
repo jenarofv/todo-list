@@ -58,6 +58,14 @@ h1 {
   background-color: var(--todo-card-bg);
 }
 
+.red-bg {
+  background-color: hsl(0 100 60);
+}
+
+.blue-bg {
+  background-color: DodgerBlue;
+}
+
 .todo:focus-within, .todo:hover {
   box-shadow: 0 0 5px 5px var(--shadow);
 }

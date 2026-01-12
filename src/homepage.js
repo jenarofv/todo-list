@@ -48,6 +48,7 @@ export default function (divClass) {
   createdTodos.id = "created-todos";
   addBtn.id = "add-todo";
   addBtn.classList.add("with-margins");
+  addBtn.classList.add("blue-bg");
   addBtn.textContent = "Create Todo";
   addBtn.addEventListener("click", addToTodos);
   main.classList.add(divClass);
