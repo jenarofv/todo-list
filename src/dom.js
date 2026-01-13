@@ -153,6 +153,23 @@ class Dom {
     return ul;
   }
 
+  static generateProjectList (projectSet) {
+    if (projectSet.size === 0) {
+      return false;
+    }
+    const ul = document.createElement("ul");
+    ul.style.listStyleType = "none";
+    projectSet.forEach( item => {
+      const li = document.createElement("li");
+      const description = document.createElement("label");
+      console.log(item);
+      description.textContent = item;
+      li.appendChild(description);
+      ul.appendChild(li);
+    })
+    return ul;
+  }
+
   static renderTodo (todo) {
     const todoContainer = document.createElement("div");
     todoContainer.classList.add("todo");
@@ -165,7 +182,14 @@ class Dom {
     const checklist = Dom.generateChecklist(todo.checklist);
     const done = document.createElement("input");
     const doneLabel = document.createElement("label");
-    const projects  = document.createElement("p");
+    const projectCointaner = document.createElement("div");
+    const projects = Dom.generateProjectList(todo.projects);
+    if (typeof projects !== "boolean") {
+      projectCointaner.textContent = "Projects:"
+      projectCointaner.appendChild(projects);
+    } else {
+      projectCointaner.textContent = "(no projects)";
+    }
     const deleteButton = document.createElement("button");
     title.textContent = todo.title;
     description.textContent = todo.description;
@@ -184,10 +208,10 @@ class Dom {
     deleteButton.addEventListener("click",  () => {Dom.removeTodo(todoContainer)});
     deleteButton.classList.add("red-bg");
     done.addEventListener("input", Dom.markAsDone);
-    projects.textContent = "projects not implemented";
     const items = [
-      title, description, dueDate, priority, notes, checklist, done, doneLabel,
-      deleteButton
+      title, description, dueDate, priority, notes, checklist,
+      projectCointaner,
+      done, doneLabel, deleteButton
     ]
     for (const item of items) {
       todoContainer.appendChild(item);

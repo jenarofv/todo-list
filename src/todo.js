@@ -11,7 +11,7 @@ class Todo {
   #done;
   #projects;
 
-  constructor (title, description, dueDate, prio, notes, checklist) {
+  constructor (title, description, dueDate, prio, notes, checklist, projects) {
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -19,7 +19,7 @@ class Todo {
     this.notes = notes;
     this.checklist = checklist;
     this.done = false;
-    this.projects = new Set();
+    this.projects = projects;
   }
   
   set title (newTitle) {
@@ -44,6 +44,14 @@ class Todo {
 
   set checklist (newChecklist) {
     this.#checklist = newChecklist;
+  }
+
+  set projects (projectString) {
+    if (typeof projectString !== "undefined" && projectString !== "") {
+      this.#projects = new Set(projectString.toLowerCase().split(","));
+    } else {
+      this.#projects = new Set();
+    }
   }
 
   addToProject (project) {
@@ -80,6 +88,10 @@ class Todo {
 
   get done () {
     return this.#done;
+  }
+
+  get projects () {
+    return this.#projects;
   }
 
   set done (bool) {

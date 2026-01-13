@@ -10,7 +10,7 @@ function addToTodos (event) {
   const notes = document.querySelector("#notes").value;
   const prio = document.querySelector("#priority").value;
   const checklistString = document.querySelector("#checklist").value;
-  const projects = document.querySelector("#projects").value;
+  const projectsString = document.querySelector("#projects").value;
   const createdTodos = document.querySelector("#created-todos");
 
   let checklistObj = {};
@@ -23,7 +23,9 @@ function addToTodos (event) {
                           }, {});
   }
 
-  const todo = new Todo(title, description, dueDate, prio, notes, checklistObj);
+  const todo = new Todo(title, description, dueDate, prio, notes, checklistObj,
+    projectsString
+  );
   todoList.push(todo);
   const todoElement = Dom.renderTodo(todo);
   createdTodos.appendChild(todoElement);
