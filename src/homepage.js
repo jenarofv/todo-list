@@ -1,8 +1,10 @@
 import Todo from "./todo.js";
 import Dom from "./dom.js";
 import BlankTodo from "./BlankTodo.js";
+import Projects from "./projects.js";
 
 const todoList = [];
+const projects = new Projects();
 const todoForm = new BlankTodo();
 
 function addToTodos (event) {
@@ -28,6 +30,10 @@ function addToTodos (event) {
   const todo = new Todo(title, description, dueDate, prio, notes, checklistObj,
     projectsString
   );
+  const todoProjects = todo.projects;
+  todoProjects.forEach(element => {
+    projects.addProject(element);
+  });
   todoList.push(todo);
   const todoElement = Dom.renderTodo(todo);
   createdTodos.appendChild(todoElement);

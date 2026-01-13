@@ -48,7 +48,13 @@ class Todo {
 
   set projects (projectString) {
     if (typeof projectString !== "undefined" && projectString !== "") {
-      this.#projects = new Set(projectString.toLowerCase().split(","));
+      this.#projects = new Set(projectString
+                                .replaceAll(", ", ",")
+                                .replaceAll(/ +/g, " ")
+                                .replaceAll(/ +$/g, "")
+                                .replaceAll(/^ +/g, "")
+                                .replaceAll(/[^a-zA-Z0-9\-_#, ]+/g, "")
+                                .toLowerCase().split(","));
     } else {
       this.#projects = new Set();
     }
