@@ -1,7 +1,9 @@
 import Todo from "./todo.js";
 import Dom from "./dom.js";
+import BlankTodo from "./BlankTodo.js";
 
 const todoList = [];
+const todoForm = new BlankTodo();
 
 function addToTodos (event) {
   const title = document.querySelector("#title").value;
@@ -29,7 +31,7 @@ function addToTodos (event) {
   todoList.push(todo);
   const todoElement = Dom.renderTodo(todo);
   createdTodos.appendChild(todoElement);
-  Dom.ClearBlankTodo();
+  todoForm.clear();
 }
 
 function layout () {
@@ -65,8 +67,7 @@ export default function (divClass) {
   addBtn.addEventListener("click", addToTodos);
   main.classList.add(divClass);
   main.classList.add("with-margins");
-  const todoDom = new Dom(`.${divClass}`);
-  todoDom.addBlankTodo();
+  todoForm.render(main);
   main.appendChild(addBtn);
   body.appendChild(createdTodos);
 }
