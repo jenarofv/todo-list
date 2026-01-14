@@ -4,7 +4,7 @@ import BlankTodo from "./BlankTodo.js";
 import Projects from "./projects.js";
 import StorageHandler from "./StorageHandler.js";
 
-const todoList = [];
+const todoList = StorageHandler.loadTodos();
 const projects = new Projects();
 const todoForm = new BlankTodo();
 
@@ -28,7 +28,7 @@ function addToTodos (event) {
                           }, {});
   }
 
-  const todo = new Todo(title, description, dueDate, prio, notes, checklistObj,
+  const todo = new Todo(todoList.length, title, description, dueDate, prio, notes, checklistObj,
     projectsString
   );
   const todoProjects = todo.projects;
@@ -36,6 +36,7 @@ function addToTodos (event) {
     projects.addProject(element);
   });
   StorageHandler.saveProjects(projects.projects);
+  StorageHandler.saveTodo(todo, todoList.length);
   todoList.push(todo);
   const todoElement = Dom.renderTodo(todo);
   createdTodos.appendChild(todoElement);
@@ -78,4 +79,7 @@ export default function (divClass) {
   todoForm.render(main);
   main.appendChild(addBtn);
   body.appendChild(createdTodos);
+  todoList.forEach(todo => {
+    createdTodos.appendChild(Dom.renderTodo(todo));
+  });
 }

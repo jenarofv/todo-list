@@ -16,6 +16,27 @@ class StorageHandler {
     const newProjectString = Array.from(newProjectSet).join();
     localStorage.setItem("projects", newProjectString);
   }
+
+  static loadTodos () {
+    let enoughTodos = true;
+    let counter = 0;
+    let todoArr = [];
+    while (enoughTodos) {
+      const todoItem = localStorage.getItem(`todo-${counter}`);
+      if (todoItem === null) { return todoArr; }
+      const processedTodoItem = JSON.parse(todoItem);
+      processedTodoItem.projects = new Set(processedTodoItem.projects.split(","));
+      todoArr.push(processedTodoItem);
+      counter++;
+    }
+    return todoArr;
+  }
+
+  static saveTodo (todo, counter) {
+    console.log(todo.toJSON());
+    localStorage.setItem(`todo-${counter}`, todo.toJSON());
+  }
+
 }
 
 export default StorageHandler;

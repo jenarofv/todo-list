@@ -1,5 +1,3 @@
-import Projects from "./projects.js";
-
 class Dom {
 
   content;
@@ -11,6 +9,9 @@ class Dom {
   static removeTodo (parent) {
     const confirmation = window.confirm("Do you really want to delete this item?");
     if (confirmation) {
+      const id = parent.id;
+      console.log("id: "+ id);
+      localStorage.removeItem(id);
       parent.remove();
     }
   }
@@ -57,6 +58,7 @@ class Dom {
 
   static renderTodo (todo) {
     const todoContainer = document.createElement("div");
+    todoContainer.id = todo.id;
     todoContainer.classList.add("todo");
     todoContainer.classList.add(todo.priority);
     const title = document.createElement("h2");

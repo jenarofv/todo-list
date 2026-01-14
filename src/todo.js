@@ -11,7 +11,8 @@ class Todo {
   #done;
   #projects;
 
-  constructor (title, description, dueDate, prio, notes, checklist, projects) {
+  constructor (id, title, description, dueDate, prio, notes, checklist, projects) {
+    this.id = `todo-${id}`;
     this.title = title;
     this.description = description;
     this.dueDate = dueDate;
@@ -39,7 +40,7 @@ class Todo {
   }
 
   set notes (newNotes) {
-    this.#notes = newNotes;
+    this.#notes = newNotes.replaceAll("\n", "\\n");
   }
 
   set checklist (newChecklist) {
@@ -106,6 +107,20 @@ class Todo {
     } else {
       throw new Error ("property `done ` should be bool");
     }
+  }
+
+  toJSON () {
+    return '{'
+      + `"id": "${this.id}",`
+      + `"title": "${this.title}",`
+      + `"description": "${this.description}",`
+      + `"dueDate": "${this.dueDate}",`
+      + `"priority": "${this.priority}",`
+      + `"notes": "${this.notes}",`
+      + `"checklist": ${JSON.stringify(this.checklist)},`
+      + `"done": "${this.done}",`
+      + `"projects": "${Array.from(this.projects)}"`
+      + '}';
   }
 }
 
