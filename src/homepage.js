@@ -2,6 +2,7 @@ import Todo from "./todo.js";
 import Dom from "./dom.js";
 import BlankTodo from "./BlankTodo.js";
 import Projects from "./projects.js";
+import StorageHandler from "./StorageHandler.js";
 
 const todoList = [];
 const projects = new Projects();
@@ -34,6 +35,7 @@ function addToTodos (event) {
   todoProjects.forEach(element => {
     projects.addProject(element);
   });
+  StorageHandler.saveProjects(projects.projects);
   todoList.push(todo);
   const todoElement = Dom.renderTodo(todo);
   createdTodos.appendChild(todoElement);
