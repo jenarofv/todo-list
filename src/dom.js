@@ -6,15 +6,6 @@ class Dom {
     this.content = document.querySelector(content);
   }
 
-  static removeTodo (parent) {
-    const confirmation = window.confirm("Do you really want to delete this item?");
-    if (confirmation) {
-      const id = parent.id;
-      localStorage.removeItem(id);
-      parent.remove();
-    }
-  }
-
   static markAsDone (event) {
     const parent = event.target.parentElement;
     parent.classList.toggle("checked");
@@ -91,8 +82,8 @@ class Dom {
       Dom.markAsDone(event);
     })
     deleteButton.textContent = "delete";
-    deleteButton.addEventListener("click",  () => {Dom.removeTodo(todoContainer)});
     deleteButton.classList.add("red-bg");
+    deleteButton.classList.add("delete");
     done.addEventListener("input", Dom.markAsDone);
     const items = [
       title, description, dueDate, priority, notes, checklist,

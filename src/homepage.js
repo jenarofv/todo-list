@@ -4,7 +4,7 @@ import BlankTodo from "./BlankTodo.js";
 import Projects from "./projects.js";
 import StorageHandler from "./StorageHandler.js";
 
-const todoList = StorageHandler.loadTodos();
+let todoList = StorageHandler.loadTodos();
 const projects = new Projects();
 const todoForm = new BlankTodo();
 const idSet = todoList.reduce(
@@ -104,5 +104,19 @@ export default function (divClass) {
   body.appendChild(createdTodos);
   todoList.forEach(todo => {
     createdTodos.appendChild(Dom.renderTodo(todo));
+  });
+  const deleteButtons = document.querySelectorAll(".delete");
+  console.log(deleteButtons);
+  deleteButtons.forEach(x => {
+    x.addEventListener("click", event => {
+      const confirmation = window.confirm("Do you really want to delete this item?");
+      if (confirmation) {
+        const todo = event.target.parentElement;
+        const id = todo.id;
+        todoList = todoList.filter(todo => todo.id !== id);
+        StorageHandler.saveTodos(todoList);
+        todo.remove();
+      }
+    })
   });
 }
