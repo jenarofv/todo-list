@@ -36,8 +36,8 @@ function addToTodos (event) {
     projects.addProject(element);
   });
   StorageHandler.saveProjects(projects.projects);
-  StorageHandler.saveTodo(todo, todoList.length);
   todoList.push(todo);
+  StorageHandler.saveTodos(todoList);
   const todoElement = Dom.renderTodo(todo);
   createdTodos.appendChild(todoElement);
   todoForm.clear();

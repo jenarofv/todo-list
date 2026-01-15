@@ -110,17 +110,17 @@ class Todo {
   }
 
   toJSON () {
-    return '{'
-      + `"id": "${this.id}",`
-      + `"title": "${this.title}",`
-      + `"description": "${this.description}",`
-      + `"dueDate": "${this.dueDate}",`
-      + `"priority": "${this.priority}",`
-      + `"notes": "${this.notes}",`
-      + `"checklist": ${JSON.stringify(this.checklist)},`
-      + `"done": "${this.done}",`
-      + `"projects": "${Array.from(this.projects)}"`
-      + '}';
+    return {
+      id: this.id,
+      title: this.title,
+      description: this.description,
+      dueDate: this.dueDate,
+      priority: this.priority,
+      notes: this.notes,
+      checklist: this.checklist,
+      done: this.done,
+      projects: Array.from(this.projects)
+    };
   }
 }
 

@@ -10,7 +10,6 @@ class Dom {
     const confirmation = window.confirm("Do you really want to delete this item?");
     if (confirmation) {
       const id = parent.id;
-      console.log("id: "+ id);
       localStorage.removeItem(id);
       parent.remove();
     }

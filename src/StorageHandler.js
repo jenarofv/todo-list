@@ -18,23 +18,15 @@ class StorageHandler {
   }
 
   static loadTodos () {
-    let enoughTodos = true;
-    let counter = 0;
-    let todoArr = [];
-    while (enoughTodos) {
-      const todoItem = localStorage.getItem(`todo-${counter}`);
-      if (todoItem === null) { return todoArr; }
-      const processedTodoItem = JSON.parse(todoItem);
-      processedTodoItem.projects = new Set(processedTodoItem.projects.split(","));
-      todoArr.push(processedTodoItem);
-      counter++;
-    }
-    return todoArr;
+    const todoListStr = localStorage.getItem("todoList");
+    if (todoListStr === null) { return [] }
+    const todoList = JSON.parse(todoListStr);
+    return todoList;
   }
 
-  static saveTodo (todo, counter) {
-    console.log(todo.toJSON());
-    localStorage.setItem(`todo-${counter}`, todo.toJSON());
+  static saveTodos (todoList) {
+    const todoListStr = JSON.stringify(todoList);
+    localStorage.setItem("todoList", todoListStr);
   }
 
 }
