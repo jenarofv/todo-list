@@ -7,6 +7,28 @@ import StorageHandler from "./StorageHandler.js";
 const todoList = StorageHandler.loadTodos();
 const projects = new Projects();
 const todoForm = new BlankTodo();
+const idSet = todoList.reduce(
+  (set, todo) => {
+    set.add(todo.id);
+    return set;
+  },
+  new Set()
+)
+
+function generateID (idSet) {
+  const chars = "abcdefghijklmnoprqstuvwxyz0123456789";
+  const numOfCharacters = chars.length;
+  while (true) {
+    let randomID= "";
+    for (let i = 0; i < 12; i++) {
+      randomID += chars[Math.floor(Math.random() * numOfCharacters)];
+    }
+    if (!(randomID in idSet)) {
+      return randomID;
+    }
+  }
+
+}
 
 function addToTodos (event) {
   const title = document.querySelector("#title").value;
@@ -27,8 +49,9 @@ function addToTodos (event) {
                             return acc;
                           }, {});
   }
+  const todoId = generateID(idSet);
 
-  const todo = new Todo(todoList.length, title, description, dueDate, prio, notes, checklistObj,
+  const todo = new Todo(todoId, title, description, dueDate, prio, notes, checklistObj,
     projectsString
   );
   const todoProjects = todo.projects;
