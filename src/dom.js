@@ -1,27 +1,60 @@
+import StorageHandler from "./StorageHandler";
+
 class Dom {
 
-  content;
+  #todoList;
 
-  constructor (content) {
-    this.content = document.querySelector(content);
+  constructor (todoList) {
+    this.todoList = todoList;
   }
 
-  static markAsDone (event) {
-    const parent = event.target.parentElement;
-    parent.classList.toggle("checked");
+  get todoList () {
+    return this.#todoList;
   }
 
-  static generateChecklist (checklist) {
+  set todoList (newTodoList) {
+    this.#todoList = newTodoList;
+  }
+
+  addTodo (todo) {
+    this.#todoList.push(todo);
+  }
+
+  markAsDone (event) {
+    event.target.parentElement.classList.toggle("checked");
+    const todoId = event.target.parentElement.id;
+    const index = this.todoList.findIndex(x => x.id === todoId);
+    this.#todoList[index].done = !this.#todoList[index].done;
+    StorageHandler.saveTodos(this.todoList);
+  }
+
+  generateChecklist (checklist) {
     const ul = document.createElement("ul");
     ul.style.listStyleType = "none";
+    ul.classList.add("checklist");
+    ul.addEventListener("input", (event) => {
+      const label = event.target.parentElement.lastChild.textContent;
+      const todoId = ul.parentElement.id;
+      const todoIndex = this.#todoList.findIndex(x => x.id === todoId);
+      this
+        .#todoList[todoIndex]
+        .checklist[label] = !this.#todoList[todoIndex].checklist[label];
+      StorageHandler.saveTodos(this.todoList);
+    });
     for (const item in checklist) {
+      // console.log("foo");
       const li = document.createElement("li");
       const checkbox = document.createElement("input");
       const description = document.createElement("label");
       description.textContent = item;
       checkbox.type = "checkbox";
+      if (checklist[item]) {
+        checkbox.checked = true;
+      }
       description.addEventListener("click", (event) => {
         checkbox.checked = !checkbox.checked;
+        const myEvent = new InputEvent("input", {bubbles: true});
+        description.dispatchEvent(myEvent);
       });
       li.appendChild(checkbox);
       li.appendChild(description);
@@ -46,7 +79,7 @@ class Dom {
     return ul;
   }
 
-  static renderTodo (todo) {
+  renderTodo (todo) {
     const todoContainer = document.createElement("div");
     todoContainer.id = todo.id;
     todoContainer.classList.add("todo");
@@ -56,7 +89,7 @@ class Dom {
     const dueDate = document.createElement("p");
     const priority = document.createElement("p");
     const notes = document.createElement("p");
-    const checklist = Dom.generateChecklist(todo.checklist);
+    const checklist = this.generateChecklist(todo.checklist);
     const done = document.createElement("input");
     const doneLabel = document.createElement("label");
     const projectCointaner = document.createElement("div");
@@ -75,11 +108,15 @@ class Dom {
     priority.classList.add(todo.priority);
     notes.textContent = todo.notes;
     done.type = "checkbox";
+    if (todo.done) {
+      todoContainer.classList.add('checked');
+      done.checked = true;
+    }
     // crypto.createUUID does not work without HTTPS
     doneLabel.textContent = "Mark as done";
     doneLabel.addEventListener("click", (event) => {
       done.checked = !done.checked;
-      Dom.markAsDone(event);
+      this.markAsDone(event);
     })
     deleteButton.textContent = "delete";
     deleteButton.classList.add("red-bg");

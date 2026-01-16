@@ -15,6 +15,8 @@ const idSet = todoList.reduce(
   new Set()
 )
 
+const myDom = new Dom(todoList);
+
 function generateID (idSet) {
   const chars = "abcdefghijklmnoprqstuvwxyz0123456789";
   const numOfCharacters = chars.length;
@@ -59,8 +61,8 @@ function addToTodos (event) {
     projects.addProject(element);
   });
   StorageHandler.saveProjects(projects.projects);
-  todoList.push(todo);
-  StorageHandler.saveTodos(todoList);
+  myDom.addTodo(todo);
+  StorageHandler.saveTodos(myDom.todoList);
   const todoElement = Dom.renderTodo(todo);
   createdTodos.appendChild(todoElement);
   todoForm.clear();
@@ -103,10 +105,9 @@ export default function (divClass) {
   main.appendChild(addBtn);
   body.appendChild(createdTodos);
   todoList.forEach(todo => {
-    createdTodos.appendChild(Dom.renderTodo(todo));
+    createdTodos.appendChild(myDom.renderTodo(todo));
   });
   const deleteButtons = document.querySelectorAll(".delete");
-  console.log(deleteButtons);
   deleteButtons.forEach(x => {
     x.addEventListener("click", event => {
       const confirmation = window.confirm("Do you really want to delete this item?");
