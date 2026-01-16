@@ -1,11 +1,9 @@
 import Todo from "./todo.js";
 import Dom from "./dom.js";
 import BlankTodo from "./BlankTodo.js";
-import Projects from "./projects.js";
 import StorageHandler from "./StorageHandler.js";
 
 let todoList = StorageHandler.loadTodos();
-const projects = new Projects();
 const todoForm = new BlankTodo();
 const idSet = todoList.reduce(
   (set, todo) => {
@@ -56,14 +54,9 @@ function addToTodos (event) {
   const todo = new Todo(todoId, title, description, dueDate, prio, notes, checklistObj,
     projectsString
   );
-  const todoProjects = todo.projects;
-  todoProjects.forEach(element => {
-    projects.addProject(element);
-  });
-  StorageHandler.saveProjects(projects.projects);
   myDom.addTodo(todo);
   StorageHandler.saveTodos(myDom.todoList);
-  const todoElement = Dom.renderTodo(todo);
+  const todoElement = myDom.renderTodo(todo);
   createdTodos.appendChild(todoElement);
   todoForm.clear();
 }
@@ -108,16 +101,4 @@ export default function (divClass) {
     createdTodos.appendChild(myDom.renderTodo(todo));
   });
   const deleteButtons = document.querySelectorAll(".delete");
-  deleteButtons.forEach(x => {
-    x.addEventListener("click", event => {
-      const confirmation = window.confirm("Do you really want to delete this item?");
-      if (confirmation) {
-        const todo = event.target.parentElement;
-        const id = todo.id;
-        todoList = todoList.filter(todo => todo.id !== id);
-        StorageHandler.saveTodos(todoList);
-        todo.remove();
-      }
-    })
-  });
 }

@@ -6,7 +6,15 @@ class Dom {
 
   constructor (todoList) {
     this.todoList = todoList;
+    this.projects = new Set();
+    this.todoList.forEach(todo => {
+      console.log(todo.projects);
+      todo.projects.forEach(project => {
+        this.projects.add(project);
+      })
+    })
   }
+
 
   get todoList () {
     return this.#todoList;
@@ -16,7 +24,12 @@ class Dom {
     this.#todoList = newTodoList;
   }
 
+  updateProjectList(newTodo) {
+    const newProjects = todo.projects;
+  }
+
   addTodo (todo) {
+    console.log(todo.projects);
     this.#todoList.push(todo);
   }
 
@@ -121,6 +134,15 @@ class Dom {
     deleteButton.textContent = "delete";
     deleteButton.classList.add("red-bg");
     deleteButton.classList.add("delete");
+    deleteButton.addEventListener('click', event => {
+      const confirmation = window.confirm("Do you really want to delete this item?");
+      if (!confirmation) { return }
+      const todo = event.target.parentElement;
+      const id = todo.id;
+      const todoList = this.#todoList.filter(todo => todo.id !== id);
+      StorageHandler.saveTodos(todoList);
+      todo.remove();
+    })
     done.addEventListener("input", Dom.markAsDone);
     const items = [
       title, description, dueDate, priority, notes, checklist,
