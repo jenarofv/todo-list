@@ -7,12 +7,7 @@ class Dom {
   constructor (todoList) {
     this.todoList = todoList;
     this.projects = new Set();
-    this.todoList.forEach(todo => {
-      console.log(todo.projects);
-      todo.projects.forEach(project => {
-        this.projects.add(project);
-      })
-    })
+    this.updateProjectList();
   }
 
 
@@ -22,15 +17,34 @@ class Dom {
 
   set todoList (newTodoList) {
     this.#todoList = newTodoList;
+    this.updateProjectList();
   }
 
-  updateProjectList(newTodo) {
-    const newProjects = todo.projects;
+  updateProjectList () {
+    let listOfProjects = [];
+    this.#todoList.forEach(todo => {
+      listOfProjects = listOfProjects.concat(todo.projects);
+    });
+    const foo = new Set(listOfProjects);
+    this.projects = foo;
+    return foo;
+  }
+
+  renderProjects () {
+    const projectDiv = document.querySelector(".project-container");
+    projectDiv.innerHTML = "";
+    const projects = this.projects;
+    projects.forEach(project => {
+      const projectItem = document.createElement("div");
+      projectItem.classList.add("project")
+      projectItem.textContent = project;
+      projectDiv.appendChild(projectItem);
+    });
   }
 
   addTodo (todo) {
-    console.log(todo.projects);
     this.#todoList.push(todo);
+    this.updateProjectList();
   }
 
   markAsDone (event) {
@@ -95,6 +109,9 @@ class Dom {
   renderTodo (todo) {
     const todoContainer = document.createElement("div");
     todoContainer.id = todo.id;
+    for (const project of todo.projects) {
+      todoContainer.classList.add(project.replaceAll(" ", "-"));
+    }
     todoContainer.classList.add("todo");
     todoContainer.classList.add(todo.priority);
     const title = document.createElement("h2");
@@ -140,7 +157,9 @@ class Dom {
       const todo = event.target.parentElement;
       const id = todo.id;
       const todoList = this.#todoList.filter(todo => todo.id !== id);
+      this.todoList = todoList;
       StorageHandler.saveTodos(todoList);
+      this.renderProjects();
       todo.remove();
     })
     done.addEventListener("input", Dom.markAsDone);
@@ -152,6 +171,7 @@ class Dom {
     for (const item of items) {
       todoContainer.appendChild(item);
     }
+    this.renderProjects();
     return todoContainer;
   }
 }

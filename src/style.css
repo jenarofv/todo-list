@@ -51,6 +51,21 @@ h1 {
   padding-top: 16px;
 }
 
+.project-container {
+  background-color: hsla(56, 88%, 90%, 0.5);
+  border-radius: var(--big-border-radius);
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 1.2em;
+  padding: var(--small-padding);
+}
+
+.project {
+  padding: var(--small-padding);
+  border-radius: var(--small-border-radius);
+  border: 1px solid var(--font-color);
+}
+
 .todo {
   border: 1px solid var(--font-color);
   border-radius: var(--big-border-radius);

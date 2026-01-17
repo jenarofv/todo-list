@@ -5,8 +5,7 @@ import StorageHandler from "./StorageHandler.js";
 
 let todoList = StorageHandler.loadTodos();
 const todoForm = new BlankTodo();
-const idSet = todoList.reduce(
-  (set, todo) => {
+const idSet = todoList.reduce( (set, todo) => {
     set.add(todo.id);
     return set;
   },
@@ -56,6 +55,7 @@ function addToTodos (event) {
   );
   myDom.addTodo(todo);
   StorageHandler.saveTodos(myDom.todoList);
+  console.log(myDom.todoList);
   const todoElement = myDom.renderTodo(todo);
   createdTodos.appendChild(todoElement);
   todoForm.clear();
@@ -86,6 +86,9 @@ export default function (divClass) {
   const main = document.querySelector("main");
   const addBtn = document.createElement("button");
   const createdTodos = document.createElement("div");
+  const projectContainer = document.createElement("div");
+  projectContainer.classList.add('project-container');
+  projectContainer.classList.add('with-margins');
   createdTodos.id = "created-todos";
   addBtn.id = "add-todo";
   addBtn.classList.add("with-margins");
@@ -96,9 +99,9 @@ export default function (divClass) {
   main.classList.add("with-margins");
   todoForm.render(main);
   main.appendChild(addBtn);
+  body.appendChild(projectContainer);
   body.appendChild(createdTodos);
   todoList.forEach(todo => {
     createdTodos.appendChild(myDom.renderTodo(todo));
   });
-  const deleteButtons = document.querySelectorAll(".delete");
 }
