@@ -56,14 +56,13 @@ h1 {
   border-radius: var(--big-border-radius);
   display: flex;
   justify-content: space-evenly;
-  font-size: 1.2em;
   padding: var(--small-padding);
 }
 
-.project {
+.project-button {
   padding: var(--small-padding);
   border-radius: var(--small-border-radius);
-  border: 1px solid var(--font-color);
+  font-size: 1.2em;
 }
 
 .todo {
@@ -142,4 +141,8 @@ option {
   flex-flow: row-reverse wrap-reverse;
   gap: 12px;
   justify-content: space-evenly;
+}
+
+.hidden {
+  display: none;
 }

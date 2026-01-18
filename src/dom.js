@@ -33,12 +33,27 @@ class Dom {
   renderProjects () {
     const projectDiv = document.querySelector(".project-container");
     projectDiv.innerHTML = "";
+    const showAll = document.createElement("button");
+    showAll.classList.add("project-button");
+    showAll.textContent = "Show all projects";
+    showAll.addEventListener("click", e => {
+        const projectTodos = document.querySelectorAll(".todo:not(.blank-todo)");
+        projectTodos.forEach(x => x.classList.remove("hidden"));
+    });
+    projectDiv.appendChild(showAll);
     const projects = this.projects;
     projects.forEach(project => {
-      const projectItem = document.createElement("div");
-      projectItem.classList.add("project")
-      projectItem.textContent = project;
-      projectDiv.appendChild(projectItem);
+      const projectClass = project.replaceAll(" ", "-");
+      const projectButton = document.createElement("button");
+      projectButton.classList.add("project-button")
+      projectButton.textContent = project;
+      projectDiv.appendChild(projectButton);
+      projectButton.addEventListener("click", event => {
+        const projectTodos = document.querySelectorAll(`.todo:not(.${projectClass},.blank-todo)`);
+        projectTodos.forEach(div => {
+          div.classList.add("hidden");
+        })
+      });
     });
   }
 
