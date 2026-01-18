@@ -43,15 +43,20 @@ class Dom {
     projectDiv.appendChild(showAll);
     const projects = this.projects;
     projects.forEach(project => {
+      if (typeof project !== "string") { return };
       const projectClass = project.replaceAll(" ", "-");
       const projectButton = document.createElement("button");
       projectButton.classList.add("project-button")
       projectButton.textContent = project;
       projectDiv.appendChild(projectButton);
       projectButton.addEventListener("click", event => {
-        const projectTodos = document.querySelectorAll(`.todo:not(.${projectClass},.blank-todo)`);
+        const projectTodos = document.querySelectorAll(`.todo:not(.blank-todo)`);
         projectTodos.forEach(div => {
-          div.classList.add("hidden");
+          if (div.classList.contains(projectClass)) {
+            div.classList.remove("hidden");
+          } else {
+            div.classList.add("hidden");
+          }
         })
       });
     });
